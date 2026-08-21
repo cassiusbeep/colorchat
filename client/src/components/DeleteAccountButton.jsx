@@ -15,7 +15,7 @@ function DeleteAccountButton() {
         }
         try {
             const response = await fetch(
-                "http://localhost:3000/api/account",
+                `${import.meta.env.VITE_API_URL}/api/account`,
                 {
                     method: "DELETE",
                     credentials: "include"

@@ -23,7 +23,7 @@ function SendChat({ selectedUser }) {
 
         try {
             const response = await fetch(
-                "http://localhost:3000/api/messages",
+                `${import.meta.env.VITE_API_URL}/api/messages`,
                 {
                     method: "POST",
                     credentials: "include",

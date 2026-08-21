@@ -8,7 +8,7 @@ function LogoutButton() {
     async function handleLogout() {
         try {
             const response = await fetch(
-                "http://localhost:3000/api/logout",
+                `${import.meta.env.VITE_API_URL}/api/logout`,
                 {
                     method: "POST",
                     credentials: "include"

@@ -9,7 +9,7 @@ function UserList({ selectedUser, setSelectedUser }) {
         async function fetchUsers() {
             try {
                 const response = await fetch(
-                    "http://localhost:3000/api/users",
+                    `${import.meta.env.VITE_API_URL}/api/users`,
                     {
                         method: "GET",
                         credentials: "include"

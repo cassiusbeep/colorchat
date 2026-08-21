@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     async function sendHeartbeat() {
         try {
             const response = await fetch(
-                "http://localhost:3000/api/heartbeat",
+                `${import.meta.env.VITE_API_URL}/api/heartbeat`,
                 {
                     method: "POST",
                     credentials: "include"
@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
         async function checkAuth() {
             try {
                 const response = await fetch(
-                    "http://localhost:3000/api/me",
+                    `${import.meta.env.VITE_API_URL}/api/me`,
                     {
                         credentials: "include"
                     }

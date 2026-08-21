@@ -13,7 +13,7 @@ const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
 app.use(express.json());

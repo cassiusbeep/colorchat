@@ -11,7 +11,7 @@ function MessageDisplay({ selectedUser }) {
 
         async function fetchMessages() {
             const response = await fetch(
-                `http://localhost:3000/api/messages?userId=${selectedUser.id}`,
+                `${import.meta.env.VITE_API_URL}/api/messages?userId=${selectedUser.id}`,
                 {
                     credentials: "include"
                 }
