@@ -123,6 +123,7 @@ app.post("/api/login", async (req, res) => {
 
         req.session.userId = user.id;
 
+        console.log("LOGIN SESSION ID:", req.sessionID);
         console.log("LOGIN SESSION:", req.session);
 
         req.session.save((err) => {
@@ -180,7 +181,9 @@ app.post("/api/register", async (req, res) => {
 
         const user = registration.rows[0];
         req.session.userId = user.id;
+        console.log("REGISTER USER ID:", req.userId);
         console.log("REGISTER SESSION:", req.session);
+        console.log("REGISTER SESSION ID:", req.sessionID);
 
         res.status(201).json({
             message: "registration successful",
@@ -289,6 +292,7 @@ app.post("/api/heartbeat", async (req, res) => {
 
 app.get("/api/users", async (req, res) => {
     console.log("users request session:", req.session);
+    console.log("users request session ID:", req.sessionID);
     console.log("users request userId:", req.session.userId);
 
     if (!req.session.userId) {
