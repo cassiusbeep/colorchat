@@ -95,8 +95,8 @@ app.listen(PORT, () => {
 
 app.post("/api/login", async (req, res) => {
     console.log("LOGIN ROUTE HIT");
-    console.log("LOGIN BODY:", req.body);
     const { username, password } = req.body;
+    console.log("LOGIN BODY:", username);
 
     try {
         const result = await pool.query(
@@ -121,14 +121,26 @@ app.post("/api/login", async (req, res) => {
         }
 
         req.session.userId = user.id;
+
         console.log("LOGIN SESSION:", req.session);
 
-        res.json({
-            message: "login successful",
-            user: {
-                id: user.id,
-                username: user.username
+        req.session.save((err) => {
+            if (err) {
+                console.error("SESSION SAVE ERROR:", err);
+                return res.status(500).json({
+                    error: "could not save session"
+                });
             }
+
+            console.log("SESSION SAVED");
+
+            res.json({
+                message: "login successful",
+                user: {
+                    id: user.id,
+                    username: user.username
+                }
+            });
         });
     } catch (error) {
         console.error(error);
