@@ -20,12 +20,4 @@ const pool = new Pool({
     }
 });
 
-// pool.query("SELECT NOW()", (err, result) => {
-//     if (err) {
-//         console.error("DATABASE TEST FAILED:", err);
-//     } else {
-//         console.log("DATABASE TEST SUCCESS:", result.rows[0]);
-//     }
-// });
-
 module.exports = pool;

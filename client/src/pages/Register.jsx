@@ -35,7 +35,6 @@ function Register() {
                 return;
             }
 
-            console.log("registered: ", data.user);
             setUser(data.user);
             navigate("/chat", {
                 state: { newUser: true }

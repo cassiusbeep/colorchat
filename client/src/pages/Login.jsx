@@ -35,7 +35,6 @@ function Login() {
                 return;
             }
 
-            console.log("logged in: ", data.user);
             setUser(data.user);
             navigate("/chat", {
                 state: { newUser: false }
