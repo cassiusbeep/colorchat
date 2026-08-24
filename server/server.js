@@ -28,8 +28,9 @@ app.use(
         saveUninitialized: false,
         cookie: {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
+            partitioned: true,
             maxAge: 1000 * 60 * 60 * 24
         }
     })
