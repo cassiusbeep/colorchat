@@ -23,7 +23,8 @@ function Register() {
                     body: JSON.stringify({
                         username,
                         password
-                    })
+                    }),
+                    credentials: "include"
                 }
             );
 

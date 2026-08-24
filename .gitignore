@@ -1,4 +1,5 @@
 node_modules/
+ca.pem
 .env
 .env.*
 !.env.example
