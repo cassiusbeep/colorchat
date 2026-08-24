@@ -94,6 +94,8 @@ app.listen(PORT, () => {
 });
 
 app.post("/api/login", async (req, res) => {
+    console.log("LOGIN ROUTE HIT");
+    console.log("LOGIN BODY:", req.body);
     const { username, password } = req.body;
 
     try {
