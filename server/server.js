@@ -271,6 +271,9 @@ app.post("/api/heartbeat", async (req, res) => {
 });
 
 app.get("/api/users", async (req, res) => {
+    console.log("users request session:", req.session);
+    console.log("users request userId:", req.session.userId);
+
     if (!req.session.userId) {
         return res.status(401).json({
             error: "not authenticated"
