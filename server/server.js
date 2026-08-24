@@ -207,6 +207,13 @@ app.delete("/api/account", async (req, res) => {
     }
 
     try {
+        // delete all messages to or from this account
+        await pool.query(
+            `DELETE FROM messages
+            WHERE (sender_id = $1 OR recipient_id = $1)`,
+            [req.session.userId]
+        )
+
         await pool.query(
             `DELETE FROM users
             WHERE id = $1`,
@@ -327,12 +334,19 @@ app.post("/api/messages", async (req, res) => {
         const result = await pool.query(
             `INSERT INTO messages (sender_id, recipient_id, color, height)
             VALUES ($1, $2, $3, $4)
-            RETURNING msg_id, sender_id, recipient_id, color, height, created_at`,
+            RETURNING 
+                msg_id, 
+                sender_id, 
+                recipient_id, 
+                color, 
+                height, 
+                created_at,
+                sender_id = $1 AS sent`,
             [
                 req.session.userId,
                 req.body.recipientId,
                 req.body.color,
-                25
+                req.body.height
             ]
         );
 
@@ -369,7 +383,7 @@ app.get("/api/messages", async (req, res) => {
     (sender_id = $1 AND recipient_id = $2)
     OR
     (sender_id = $2 AND recipient_id = $1)
-            ORDER BY created_at`,
+            ORDER BY created_at ASC, msg_id ASC`,
             [req.session.userId, req.query.userId]
         );
 

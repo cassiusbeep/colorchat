@@ -13,6 +13,7 @@ function Chat() {
     const navigate = useNavigate();
     const { user } = useAuth();
     const [selectedUser, setSelectedUser] = useState(null);
+    const [messages, setMessages] = useState([]);
 
     return (
         <main>
@@ -27,9 +28,13 @@ function Chat() {
             />
             <MessageDisplay
                 selectedUser={selectedUser}
+                messages={messages}
+                setMessages={setMessages}
             />
             <SendChat
                 selectedUser={selectedUser}
+                messages={messages}
+                setMessages={setMessages}
             />
         </main>
     );

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import EditChat from "./EditChat";
 
-function SendChat({ selectedUser }) {
+function SendChat({ selectedUser, messages, setMessages }) {
     const [color, setColor] = useState("#FF00AA");
+    const [height, setHeight] = useState(25);
 
     function isValidHex(color) {
         return /^#[0-9A-Fa-f]{6}$/.test(color);
@@ -19,8 +21,6 @@ function SendChat({ selectedUser }) {
             return;
         }
 
-        console.log(`sending ${color} to ${selectedUser.username}`);
-
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_URL}/api/messages`,
@@ -32,15 +32,23 @@ function SendChat({ selectedUser }) {
                     },
                     body: JSON.stringify({
                         color: color,
-                        recipientId: selectedUser.id
+                        recipientId: selectedUser.id,
+                        height: height
                     })
                 }
             );
+            const data = await response.json();
+
             if (!response.ok) {
                 console.error("send chat failed");
                 return;
             }
-            setColor("");
+
+            setMessages((currentMessages) => [
+                ...currentMessages,
+                data.message
+            ]);
+
         } catch (error) {
             console.error("send chat failed: ", error);
         }
@@ -50,11 +58,17 @@ function SendChat({ selectedUser }) {
         selectedUser ? (
             <section id="chat-box" >
                 <form onSubmit={handleSend}>
-                    <input
+                    {/* <input
                         type="color"
                         value={color}
                         onChange={(event) => setColor(event.target.value)}
                         placeholder="#FF00AA"
+                    /> */}
+                    <EditChat
+                        color={color}
+                        setColor={setColor}
+                        height={height}
+                        setHeight={setHeight}
                     />
                     <button
                         type="submit"

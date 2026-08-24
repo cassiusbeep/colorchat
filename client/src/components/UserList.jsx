@@ -46,7 +46,6 @@ function UserList({ selectedUser, setSelectedUser }) {
         return <p>error: {error}</p>;
     }
 
-    // TODO: make each user clickable to open their chat!
     return (
         <section id="userlist">
             <h2>users</h2>

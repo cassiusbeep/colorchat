@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-function MessageDisplay({ selectedUser }) {
-    const [messages, setMessages] = useState([]);
+function MessageDisplay({ selectedUser, messages, setMessages }) {
+    // const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         if (!selectedUser) {
@@ -31,7 +31,7 @@ function MessageDisplay({ selectedUser }) {
                     <div
                         key={msg.msg_id}
                         className={`color-message 
-                            ${msg.sent ? 'received-msg' : 'sent-msg'}`}
+                            ${msg.sent ? 'sent-msg' : 'received-msg'}`}
                         style={{
                             backgroundColor: msg.color,
                             height: msg.height + 'px'
