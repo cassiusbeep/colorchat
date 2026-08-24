@@ -119,6 +119,7 @@ app.post("/api/login", async (req, res) => {
         }
 
         req.session.userId = user.id;
+        console.log("LOGIN SESSION:", req.session);
 
         res.json({
             message: "login successful",
@@ -164,6 +165,7 @@ app.post("/api/register", async (req, res) => {
 
         const user = registration.rows[0];
         req.session.userId = user.id;
+        console.log("REGISTER SESSION:", req.session);
 
         res.status(201).json({
             message: "registration successful",
