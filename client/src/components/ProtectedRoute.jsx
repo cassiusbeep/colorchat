@@ -14,4 +14,6 @@ function ProtectedRoute({ children }) {
     return children;
 }
 
+// fix this, it just says "not found" instead of switching to login
+
 export default ProtectedRoute;
